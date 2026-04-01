@@ -17,9 +17,9 @@
 
 **Purpose**: Prepare implement.md for parallel execution modifications
 
-- [ ] T001 Create team-protocol.md contract in specs/002-parallel-task-execution/contracts/team-protocol.md
-- [ ] T002 Create TeamConfig data model in data-model.md (TeamMember, TeamConfig, TaskStatus entities)
-- [ ] T003 Create .specify/team-config.json schema documentation
+- [X] T001 Create team-protocol.md contract in specs/002-parallel-task-execution/contracts/team-protocol.md
+- [X] T002 Create TeamConfig data model in data-model.md (TeamMember, TeamConfig, TaskStatus entities)
+- [X] T003 Create .specify/team-config.json schema documentation
 
 ---
 
@@ -29,21 +29,21 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Implement parallel detection function in templates/commands/implement.md
+- [X] T004 [P] Implement parallel detection function in templates/commands/implement.md
   - Add `analyze_parallel_opportunities(tasks_md: Path) -> list[Story]` function
   - Parse tasks.md for [P] markers and story assignments
   - Detect independent stories that can run in parallel
-- [ ] T005 [P] Implement TeamConfig entity classes
+- [X] T005 [P] Implement TeamConfig entity classes
   - Add TeamMember, TeamConfig, TaskStatus data classes
   - Add JSON serialization/deserialization for team-config.json
-- [ ] T006 [P] Implement Git force-with-lease sync function
+- [X] T006 [P] Implement Git force-with-lease sync function
   - Add `sync_tasks_md()` function using GitPython
   - Implement fetch → rebase → push --force-with-lease flow
   - Add retry logic (2 retries on failure)
-- [ ] T007 Add --serial and --parallel flag handlers
+- [X] T007 Add --serial and --parallel flag handlers
   - Add CLI flag parsing for serial/parallel mode selection
   - Store flag state for execution decisions
-- [ ] T008 Add team mode availability detection
+- [X] T008 Add team mode availability detection
   - Check `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` environment variable
   - Implement fallback to sequential when Team mode unavailable (EC-001)
 
@@ -59,19 +59,19 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [P] [US1] Implement `spawn_team_members()` function in templates/commands/implement.md
+- [X] T009 [P] [US1] Implement `spawn_team_members()` function in templates/commands/implement.md
   - Use Agent tool with `team_name` and `name` parameters
   - Create member-{story-id} naming convention
   - Implement member lifecycle management
-- [ ] T010 [P] [US1] Implement `monitor_progress()` function
+- [X] T010 [P] [US1] Implement `monitor_progress()` function
   - Track task start/complete/fail events
   - Aggregate progress from all team members
   - Update team-config.json with member status
-- [ ] T011 [US1] Implement Team Lead → Member communication protocol
+- [X] T011 [US1] Implement Team Lead → Member communication protocol
   - Send `assign` message with task list to each member
   - Handle `progress` messages from members
   - Handle `complete` messages from members
-- [ ] T012 [US1] Integrate Team spawning into implement.md execution flow
+- [X] T012 [US1] Integrate Team spawning into implement.md execution flow
   - Execute Phase 1-2 sequentially by Team Lead
   - Spawn Team Members for Phase 3+ parallel execution
   - Enforce 4 member maximum limit (FR-007)
@@ -89,15 +89,15 @@
 
 ### Implementation for User Story 2
 
-- [ ] T013 [P] [US2] Add structured logging for key events in templates/commands/implement.md
+- [X] T013 [P] [US2] Add structured logging for key events in templates/commands/implement.md
   - Log Team Member spawn events
   - Log task start/complete/fail events (SC-006)
   - Log push sync status and error conditions
-- [ ] T014 [P] [US2] Implement aggregated metrics view
+- [X] T014 [P] [US2] Implement aggregated metrics view
   - Display total tasks, completed, failed, running, pending per story (SC-007)
   - Show per-user story status with member breakdown
   - Use Rich library for terminal output formatting
-- [ ] T015 [US2] Implement real-time progress display
+- [X] T015 [US2] Implement real-time progress display
   - Show running tasks with [R] marker in aggregated view
   - Update display on each progress message
   - Handle concurrent output from multiple members
@@ -114,19 +114,19 @@
 
 ### Implementation for User Story 3
 
-- [ ] T016 [P] [US3] Implement EC-002: Git push failure handling
+- [X] T016 [P] [US3] Implement EC-002: Git push failure handling
   - Retry fetch + rebase + push up to 2 times
   - If still failing due to merge conflict, pause branch
   - Notify Team Lead to resolve manually
-- [ ] T017 [P] [US3] Implement EC-003: Member crash recovery
+- [X] T017 [P] [US3] Implement EC-003: Member crash recovery
   - Detect member failure via missing progress messages
   - Respawn new Member from last successful checkpoint
   - Resume member from checkpoint task ID
-- [ ] T018 [US3] Implement EC-004: Resource insufficient warning
+- [X] T018 [US3] Implement EC-004: Resource insufficient warning
   - Display warning when resources limited
   - Suggest --serial flag as alternative
   - Continue with available resources if possible
-- [ ] T019 [US3] Implement EC-005: Manual edit conflict detection
+- [X] T019 [US3] Implement EC-005: Manual edit conflict detection
   - Detect conflict on next push via force-with-lease
   - Pause affected branch on conflict
   - Prompt user to resolve manually
@@ -143,11 +143,11 @@
 
 ### Implementation for User Story 4
 
-- [ ] T020 [P] [US4] Verify --serial flag forces sequential execution
+- [X] T020 [P] [US4] Verify --serial flag forces sequential execution
   - When --serial is set, execute all tasks sequentially
   - Skip Team spawning entirely
   - No parallel overhead regardless of story count
-- [ ] T021 [P] [US4] Verify --parallel flag forces parallel execution
+- [X] T021 [P] [US4] Verify --parallel flag forces parallel execution
   - When --parallel is set with single story, spawn Team anyway
   - Force parallel mode even with one story
   - Useful for testing or CI/CD scenarios
@@ -169,8 +169,8 @@
 - [ ] T026 Verify backward compatibility (SC-005)
   - Existing sequential behavior unchanged when parallel conditions not met
   - Test single story scenario without parallel overhead
-- [ ] T027 Add .specify/team-config.json to .gitignore
-- [ ] T028 Update implement.md with parallel execution documentation
+- [X] T027 Add .specify/team-config.json to .gitignore
+- [X] T028 Update implement.md with parallel execution documentation
 
 ---
 

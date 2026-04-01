@@ -43,3 +43,6 @@ env/
 .genreleases/
 *.zip
 sdd-*/
+
+# Runtime team config (created during parallel execution)
+.specify/team-config.json
