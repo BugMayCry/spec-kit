@@ -160,13 +160,13 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T022 [P] Add unit tests for parallel detection logic in tests/test_parallel_detection.py
-- [ ] T023 [P] Add unit tests for TeamConfig serialization in tests/test_team_config.py
-- [ ] T024 [P] Add unit tests for Git sync behavior in tests/test_git_sync.py
-- [ ] T025 Add integration tests for full parallel execution flow
+- [X] T022 [P] Add unit tests for parallel detection logic in tests/test_parallel_detection.py
+- [X] T023 [P] Add unit tests for TeamConfig serialization in tests/test_team_config.py
+- [X] T024 [P] Add unit tests for Git sync behavior in tests/test_git_sync.py
+- [X] T025 Add integration tests for full parallel execution flow
   - Mock Team mode environment
   - Test fallback behavior (EC-001)
-- [ ] T026 Verify backward compatibility (SC-005)
+- [X] T026 Verify backward compatibility (SC-005)
   - Existing sequential behavior unchanged when parallel conditions not met
   - Test single story scenario without parallel overhead
 - [X] T027 Add .specify/team-config.json to .gitignore
