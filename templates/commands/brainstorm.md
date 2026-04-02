@@ -21,6 +21,8 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Extract the `<idea>` argument (one-sentence feature description)
    - Generate short-name from idea (2-4 words, lowercase, hyphenated)
    - Check for `--with-security` flag
+   - Check for `--mode {full|quick}` flag (default: full)
+   - Check for `--skip-awareness` flag
    - If no idea provided: Prompt user for clarification (EC-002)
 
 3. **Check Team mode availability**:
@@ -42,6 +44,51 @@ You **MUST** consider the user input before proceeding (if not empty).
    | Devil's Advocate | `member-devil` | Debate phase only |
 
 5. **Execute brainstorming workflow**:
+
+   ### Phase 0: Repository Awareness (NEW)
+   - **Before starting proposal preparation, display project repository information**
+   - **This phase ensures architects and technical experts understand the project context**
+
+   #### Step 0.1: Extract Repository Information
+   ```
+   - Read README.md for project overview
+   - Scan for tech stack files (package.json, pyproject.toml, go.mod, etc.)
+   - Check .specify/ directory for SDD configuration
+   - Scan docs/ directory for architecture documentation
+   - Detect directory structure
+   ```
+
+   #### Step 0.2: Display Repository Overview
+   ```
+   **Mode: Full** (default)
+   - Show project name and description
+   - Show detected tech stack
+   - Show architecture documentation paths
+   - Show directory structure
+   - Show all available documentation
+
+   **Mode: Quick**
+   - Show project name and description
+   - Show detected tech stack only
+   - Skip detailed documentation
+   ```
+
+   #### Step 0.3: User Confirmation
+   ```
+   - Display: "Please review the project information above"
+   - Option 1: "I have reviewed and understand the project" → Proceed to Phase 1
+   - Option 2: "Skip awareness phase" → Only if user has previous confirmation record in .specify/awareness-state.json
+   - If user attempts to skip without record → Display warning, require confirmation
+   ```
+
+   #### Step 0.4: Record Awareness State
+   ```
+   - Update .specify/awareness-state.json with:
+     - userId
+     - confirmedAt (timestamp)
+     - modeSelected (full/quick)
+     - skipUsed (boolean)
+   ```
 
    ### Phase 1: Proposal Collection
    - Spawn Team Members for each active role
@@ -69,6 +116,8 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Determine next available spec number (e.g., `004`)
    - Create directory: `specs/<number>-<short-name>/`
    - Generate `specs/<number>-<short-name>/spec.md` (concise draft for specify)
+     - **IMPORTANT**: Replace `$STATUS` in the generated spec with `Proposal`
+     - Filename format: `proposal-<number>-<short-name>-spec.md` (note: "proposal-" prefix)
    - Generate `specs/<number>-<short-name>/brainstorm-appendix.md` (full technical analysis)
    - **Create feature branch**: `git checkout -b <number>-<short-name>` to enable seamless specify workflow
    - Present results to user with next steps and remind them they can now run `/speckit.specify` to continue

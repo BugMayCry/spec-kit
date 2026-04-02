@@ -18,9 +18,9 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 [P] Review existing brainstorm.md template at templates/commands/brainstorm.md
-- [ ] T002 [P] Review existing spec-template.md at templates/spec-template.md
-- [ ] T003 [P] Review contracts/brainstorm-awareness.md for interface details
+- [x] T001 [P] Review existing brainstorm.md template at templates/commands/brainstorm.md
+- [x] T002 [P] Review existing spec-template.md at templates/spec-template.md
+- [x] T003 [P] Review contracts/brainstorm-awareness.md for interface details
 
 **Checkpoint**: Ready to begin template modifications
 
@@ -46,11 +46,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T007 [P] [US1] Add --mode parameter handling in templates/commands/brainstorm.md
-- [ ] T008 [P] [US1] Add repository awareness display section in templates/commands/brainstorm.md
-- [ ] T009 [US1] Add user confirmation flow in templates/commands/brainstorm.md
+- [x] T007 [P] [US1] Add --mode parameter handling in templates/commands/brainstorm.md
+- [x] T008 [P] [US1] Add repository awareness display section in templates/commands/brainstorm.md
+- [x] T009 [US1] Add user confirmation flow in templates/commands/brainstorm.md
 - [ ] T010 [US1] Integrate awareness state recording after confirmation
-- [ ] T011 [US1] Add warning when repo info is incomplete in templates/commands/brainstorm.md
+- [x] T011 [US1] Add warning when repo info is incomplete in templates/commands/brainstorm.md
 
 **Checkpoint**: At this point, User Story 1 should be fully functional
 
@@ -96,8 +96,8 @@
 
 ### Implementation for User Story 4
 
-- [ ] T018 [P] [US4] Modify spec filename generation to add "proposal-" prefix
-- [ ] T019 [P] [US4] Modify Status field to set "Proposal" in generated spec
+- [x] T018 [P] [US4] Modify spec filename generation to add "proposal-" prefix
+- [x] T019 [P] [US4] Modify Status field to set "Proposal" in generated spec
 - [ ] T020 [US4] Verify dual identification works correctly
 
 **Checkpoint**: User Story 4 complete - proposals clearly distinguished from specs
@@ -136,7 +136,7 @@
 
 ### Phase Dependencies
 
-- **Setup (Phase 1)**: No dependencies - can start immediately
+- **Setup (Phase 1)**: No dependencies - can start immediately ✓
 - **Foundational (Phase 2)**: Depends on Setup - BLOCKS all user stories
 - **User Stories (Phase 3-7)**: All depend on Foundational phase
 - **Polish (Phase 8)**: Depends on all user stories being complete
@@ -157,7 +157,7 @@
 
 ### Parallel Opportunities
 
-- All Setup tasks marked [P] can run in parallel
+- All Setup tasks marked [P] can run in parallel ✓
 - Foundational tasks marked [P] can run in parallel
 - US1, US2, US3, US4, US5 can be worked on in parallel after Foundational
 - Different template sections marked [P] within each story
@@ -168,9 +168,9 @@
 
 To ship MVP:
 
-1. Complete Phase 1: Setup
+1. Complete Phase 1: Setup ✓
 2. Complete Phase 2: Foundational
-3. Complete Phase 3: User Story 1
+3. Complete Phase 3: User Story 1 (Partial - T010 remaining)
 4. **STOP and VALIDATE**: Test awareness flow works
 5. Deploy/demo if ready
 
