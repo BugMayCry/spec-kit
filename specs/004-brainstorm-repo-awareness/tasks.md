@@ -64,9 +64,9 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [P] [US2] Enhance repository info extraction to include tech stack detection
-- [ ] T013 [P] [US2] Add core modules and dependencies display in templates/commands/brainstorm.md
-- [ ] T014 [US2] Add component linking when expert references existing components
+- [x] T012 [P] [US2] Enhance repository info extraction to include tech stack detection
+- [x] T013 [P] [US2] Add core modules and dependencies display in templates/commands/brainstorm.md
+- [x] T014 [US2] Add component linking when expert references existing components
 
 **Checkpoint**: User Story 2 complete - tech experts can verify feasibility
 
@@ -80,9 +80,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T015 [P] [US3] Add project background doc detection (README, docs/)
-- [ ] T016 [P] [US3] Add architecture design principles display in templates/commands/brainstorm.md
-- [ ] T017 [US3] Record awareness completion state for new members
+- [x] T015 [P] [US3] Add project background doc detection (README, docs/)
+- [x] T016 [P] [US3] Add architecture design principles display in templates/commands/brainstorm.md
+- [x] T017 [US3] Record awareness completion state for new members
 
 **Checkpoint**: User Story 3 complete - new members can onboard quickly
 
@@ -98,7 +98,7 @@
 
 - [x] T018 [P] [US4] Modify spec filename generation to add "proposal-" prefix
 - [x] T019 [P] [US4] Modify Status field to set "Proposal" in generated spec
-- [ ] T020 [US4] Verify dual identification works correctly
+- [x] T020 [US4] Verify dual identification works correctly
 
 **Checkpoint**: User Story 4 complete - proposals clearly distinguished from specs
 
@@ -112,10 +112,10 @@
 
 ### Implementation for User Story 5
 
-- [ ] T021 [P] [US5] Implement --skip-awareness parameter in templates/commands/brainstorm.md
-- [ ] T022 [P] [US5] Implement skip validation (check awareness-state.json)
-- [ ] T023 [P] [US5] Implement quick mode display (core info only) vs full mode
-- [ ] T024 [US5] Record skip usage in awareness-state.json
+- [x] T021 [P] [US5] Implement --skip-awareness parameter in templates/commands/brainstorm.md
+- [x] T022 [P] [US5] Implement skip validation (check awareness-state.json)
+- [x] T023 [P] [US5] Implement quick mode display (core info only) vs full mode
+- [x] T024 [US5] Record skip usage in awareness-state.json
 
 **Checkpoint**: User Story 5 complete - skip and mode selection work
 

@@ -53,36 +53,52 @@ You **MUST** consider the user input before proceeding (if not empty).
    ```
    IMPLEMENTATION REQUIRED:
 
-   1. Read README.md (if exists) for project overview and description
+   1. Read README.md (if exists) for:
+      - Project name and description
+      - Project background and purpose
+      - Design principles (if documented)
    2. Scan root directory for tech stack indicators:
-      - package.json → Node.js/JavaScript
-      - pyproject.toml → Python
-      - go.mod → Go
-      - Cargo.toml → Rust
-      - pom.xml → Java
-      - *.csproj → C#/.NET
-   3. Check .specify/ directory for SDD configuration files
-   4. Scan docs/ directory for architecture documentation (*.md files)
-   5. Detect top-level directory structure (list root folders)
+      - package.json → Node.js/JavaScript (show dependencies list)
+      - pyproject.toml → Python (show dependencies list)
+      - go.mod → Go (show dependencies list)
+      - Cargo.toml → Rust (show dependencies list)
+      - pom.xml → Java (show dependencies list)
+   3. Detect core modules and directory structure:
+      - List src/, lib/, app/, packages/ directories
+      - Identify main entry points (index.js, main.py, main.go, etc.)
+      - Show relationship between modules
+   4. Check .specify/ directory for SDD configuration files
+   5. Scan docs/ directory for architecture documentation (*.md files)
    6. Check for common doc files: CONTRIBUTING.md, ARCHITECTURE.md, DESIGN.md
+   7. For each detected tech stack component, note its purpose if documented
    ```
 
    #### Step 0.2: Display Repository Overview
    ```
    **Mode: Full** (default)
-   Display all collected information:
-   - Project name (from README or directory name)
-   - Project description (first paragraph of README)
-   - Detected tech stack (list all found)
+   Display all collected information organized by audience:
+
+   For Technical Expert (US2):
+   - Tech stack with version info (from package.json, pyproject.toml, etc.)
+   - Key dependencies list (show main dependencies)
+   - Core modules and their relationships
+   - Entry points (main.py, index.js, main.go, etc.)
+
+   For Architect:
+   - Directory structure (src/, lib/, app/, etc.)
    - Architecture documentation paths
-   - Directory structure (top-level folders)
-   - All available documentation files
+   - Design principles (if found)
+
+   For New Members (US3):
+   - Project background and purpose
+   - Contributing guidelines (CONTRIBUTING.md)
+   - Design principles summary
 
    **Mode: Quick**
    Display only essential information:
    - Project name
    - Project description
-   - Detected tech stack
+   - Detected tech stack (brief)
    - "Press Enter to continue or 'S' to skip detailed view"
    ```
 
