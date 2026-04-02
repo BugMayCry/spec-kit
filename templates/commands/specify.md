@@ -97,16 +97,16 @@ Given that feature description, do this:
       - Specs directories matching short-name
 
    e. **Handle existing brainstorm directory**:
-      - If directory found with matching short-name AND contains `brainstorm-appendix.md`:
+      - If directory found with matching short-name AND contains `spec.proposal.md`:
         1. Inform user: "Found existing brainstorm session: specs/<existing-dir>/"
         2. Present options:
            - **Continue (C)**: Use existing directory - recommended if brainstorm was just completed
            - **New (N)**: Create new directory with next available number
         3. If user chooses **Continue**:
            - Run: `git checkout -b <existing-dir> && export SPECIFY_FEATURE=<existing-dir>`
-           - Load `specs/<existing-dir>/spec.md` as the starting draft
-           - Load `specs/<existing-dir>/brainstorm-appendix.md` for technical context
-           - Skip to step 4 to refine the existing spec
+           - Load `specs/<existing-dir>/spec.proposal.md` as the starting draft (user stories from brainstorm)
+           - Load `specs/<existing-dir>/brainstorm-appendix.md` for additional context
+           - Skip to step 4 to refine the spec proposal into final spec
       4. If user chooses **New** or no existing directory found:
            - Continue with normal flow
 

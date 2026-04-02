@@ -156,12 +156,18 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check for specs directory, create if not exists
    - Determine next available spec number (e.g., `004`)
    - Create directory: `specs/<number>-<short-name>/`
-   - Generate `specs/<number>-<short-name>/spec.md` (concise draft for specify)
-     - **IMPORTANT**: Replace `$STATUS` in the generated spec with `Proposal`
-     - Filename format: `proposal-<number>-<short-name>-spec.md` (note: "proposal-" prefix)
-   - Generate `specs/<number>-<short-name>/brainstorm-appendix.md` (full technical analysis)
+   - Generate `specs/<number>-<short-name>/spec.proposal.md` (user stories draft)
+     - **Source**: PM + Test Expert contributions
+     - **Contains**: User scenarios, user stories, acceptance criteria, priority
+     - **No technical details**
+   - Generate `specs/<number>-<short-name>/plan.proposal.md` (technical proposal draft)
+     - **Source**: Architect + Tech Expert contributions
+     - **Contains**: System design, tech stack, risks, integration points
+   - Generate `specs/<number>-<short-name>/brainstorm-appendix.md` (full transcript, unchanged)
    - **Create feature branch**: `git checkout -b <number>-<short-name>` to enable seamless specify workflow
-   - Present results to user with next steps and remind them they can now run `/speckit.specify` to continue
+   - Present results to user with next steps:
+     - "Run `/speckit.specify` to refine spec.proposal.md into final spec"
+     - "Run `/speckit.plan` to analyze plan.proposal.md and create technical design"
 
 6. **Fallback to Lite Mode** (if Team mode unavailable):
    - Run in single-agent mode
@@ -287,17 +293,29 @@ Challenge every assumption:
 
 ## Output Format
 
-### spec.md (Concise Draft for Specify)
-A clean, concise spec that specify can understand and refine. Include only:
-- Feature name and brief description
-- Key decisions already made (with rationale)
-- Open questions for specify to explore
-- High-level user scenarios
+### spec.proposal.md (User Stories Draft)
+User stories and requirements extracted from brainstorming. This is what specify refines into final spec.
+- User needs and pain points (from PM)
+- User scenarios and journeys (from PM, reviewed by Test)
+- User stories with priorities
+- Acceptance criteria (from Test)
+- Business value and ROI considerations
 
-**IMPORTANT**: Keep this minimal. Do NOT include technical details here - they belong in the appendix.
+**IMPORTANT**: This contains no technical details - only user-facing requirements.
+
+### plan.proposal.md (Technical Proposal Draft)
+Technical architecture and implementation considerations extracted from brainstorming. This is what plan analyzes and expands.
+- System design proposals (from Architect)
+- Technology selection options (from Tech Expert)
+- Scalability and reliability considerations (from Architect)
+- Implementation risks and constraints (from Tech Expert)
+- Integration points and dependencies
+- Non-functional requirements (DFX)
+
+**NOTE**: This is raw technical input for plan - plan will analyze, validate, and expand into detailed design.
 
 ### Appendix: brainstorm-appendix.md (Full Technical Analysis)
-Comprehensive technical analysis preserved for reference by specify/plan:
+Comprehensive technical analysis preserved for reference:
 - Chronological debate transcript
 - All role proposals (verbatim)
 - All counter-arguments and challenges

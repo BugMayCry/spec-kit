@@ -64,6 +64,12 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
 
+   **Additionally, check for and load plan.proposal.md**:
+   - If `plan.proposal.md` exists in the feature directory (from brainstorm), load it
+   - This file contains technical proposals from Architect and Tech Expert extracted during brainstorm
+   - Integrate its contents into the Technical Context analysis phase
+   - Extract technology choices, integration points, and technical constraints from plan.proposal.md
+
 3. **Execute plan workflow**: Follow the structure in IMPL_PLAN template to:
    - Fill Technical Context (mark unknowns as "NEEDS CLARIFICATION")
    - Fill Constitution Check section from constitution
@@ -108,8 +114,18 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ### Phase 0: Outline & Research
 
-1. **Extract unknowns from Technical Context** above:
+**Prerequisite**: Ensure plan.proposal.md has been loaded (from Step 2)
+
+1. **Analyze plan.proposal.md** (if exists):
+   - Extract technology choices proposed by Tech Expert
+   - Extract system design proposals from Architect
+   - Extract integration points and dependencies
+   - Extract technical constraints and risks
+   - Mark any unvalidated proposals as "NEEDS VERIFICATION"
+
+2. **Extract unknowns from Technical Context** above (including plan.proposal analysis):
    - For each NEEDS CLARIFICATION → research task
+   - For each NEEDS VERIFICATION (from plan.proposal) → validation task
    - For each dependency → best practices task
    - For each integration → patterns task
 
