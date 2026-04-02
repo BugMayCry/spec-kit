@@ -51,43 +51,68 @@ You **MUST** consider the user input before proceeding (if not empty).
 
    #### Step 0.1: Extract Repository Information
    ```
-   - Read README.md for project overview
-   - Scan for tech stack files (package.json, pyproject.toml, go.mod, etc.)
-   - Check .specify/ directory for SDD configuration
-   - Scan docs/ directory for architecture documentation
-   - Detect directory structure
+   IMPLEMENTATION REQUIRED:
+
+   1. Read README.md (if exists) for project overview and description
+   2. Scan root directory for tech stack indicators:
+      - package.json → Node.js/JavaScript
+      - pyproject.toml → Python
+      - go.mod → Go
+      - Cargo.toml → Rust
+      - pom.xml → Java
+      - *.csproj → C#/.NET
+   3. Check .specify/ directory for SDD configuration files
+   4. Scan docs/ directory for architecture documentation (*.md files)
+   5. Detect top-level directory structure (list root folders)
+   6. Check for common doc files: CONTRIBUTING.md, ARCHITECTURE.md, DESIGN.md
    ```
 
    #### Step 0.2: Display Repository Overview
    ```
    **Mode: Full** (default)
-   - Show project name and description
-   - Show detected tech stack
-   - Show architecture documentation paths
-   - Show directory structure
-   - Show all available documentation
+   Display all collected information:
+   - Project name (from README or directory name)
+   - Project description (first paragraph of README)
+   - Detected tech stack (list all found)
+   - Architecture documentation paths
+   - Directory structure (top-level folders)
+   - All available documentation files
 
    **Mode: Quick**
-   - Show project name and description
-   - Show detected tech stack only
-   - Skip detailed documentation
+   Display only essential information:
+   - Project name
+   - Project description
+   - Detected tech stack
+   - "Press Enter to continue or 'S' to skip detailed view"
    ```
 
    #### Step 0.3: User Confirmation
    ```
-   - Display: "Please review the project information above"
-   - Option 1: "I have reviewed and understand the project" → Proceed to Phase 1
-   - Option 2: "Skip awareness phase" → Only if user has previous confirmation record in .specify/awareness-state.json
-   - If user attempts to skip without record → Display warning, require confirmation
+   1. Display: "Please review the project information above"
+   2. Options:
+      - [Enter] "I have reviewed and understand the project" → Record confirmation → Proceed to Phase 1
+      - [S] "Skip awareness phase" → Check .specify/awareness-state.json for user record
+         - If record exists: Record skip → Proceed to Phase 1
+         - If no record: Display warning "You must complete awareness phase first"
+   3. If repository info is incomplete/missing:
+      - Display warning: "Some repository information could not be found"
+      - List what was found vs what was missing
+      - Require explicit confirmation
    ```
 
    #### Step 0.4: Record Awareness State
    ```
-   - Update .specify/awareness-state.json with:
-     - userId
-     - confirmedAt (timestamp)
-     - modeSelected (full/quick)
-     - skipUsed (boolean)
+   After user confirmation:
+
+   1. Load .specify/awareness-state.json
+   2. Generate userId (use environment: USER or USERNAME)
+   3. Update user's record:
+      {
+        "lastConfirmed": "<ISO-8601 timestamp>",
+        "skipCount": <increment if skip used>,
+        "preferredMode": "<full|quick>"
+      }
+   4. Save back to .specify/awareness-state.json
    ```
 
    ### Phase 1: Proposal Collection

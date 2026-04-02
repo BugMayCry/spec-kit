@@ -32,9 +32,9 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Define awareness state schema in .specify/awareness-state.json
-- [ ] T005 [P] Implement awareness state read/write functions in src/specify_cli/
-- [ ] T006 [P] Implement repository info extraction logic (README, tech stack, dir structure)
+- [x] T004 Define awareness state schema in .specify/awareness-state.json
+- [x] T005 [P] Implement awareness state read/write functions in src/specify_cli/
+- [x] T006 [P] Implement repository info extraction logic (README, tech stack, dir structure)
 
 ---
 
@@ -49,7 +49,7 @@
 - [x] T007 [P] [US1] Add --mode parameter handling in templates/commands/brainstorm.md
 - [x] T008 [P] [US1] Add repository awareness display section in templates/commands/brainstorm.md
 - [x] T009 [US1] Add user confirmation flow in templates/commands/brainstorm.md
-- [ ] T010 [US1] Integrate awareness state recording after confirmation
+- [x] T010 [US1] Integrate awareness state recording after confirmation
 - [x] T011 [US1] Add warning when repo info is incomplete in templates/commands/brainstorm.md
 
 **Checkpoint**: At this point, User Story 1 should be fully functional
