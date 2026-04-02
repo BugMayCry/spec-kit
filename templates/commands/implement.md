@@ -171,7 +171,6 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit.tasks` first to regenerate the task list.
 
-<<<<<<< Updated upstream
 10. **Check for extension hooks**: After completion validation, check if `.specify/extensions.yml` exists in the project root.
     - If it exists, read it and look for entries under the `hooks.after_implement` key
     - If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
@@ -200,7 +199,7 @@ Note: This command assumes a complete task breakdown exists in tasks.md. If task
         EXECUTE_COMMAND: {command}
         ```
     - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
-=======
+
 ---
 
 ## Parallel Execution via Agent Teams
@@ -273,5 +272,3 @@ Teammates communicate via `SendMessage` tool. When teammate reports completion:
 ### Step 6: Sequential Fallback
 
 If only 1 task group exists, execute tasks sequentially following tasks.md order.
-
->>>>>>> Stashed changes
