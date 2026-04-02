@@ -171,6 +171,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/speckit.tasks` first to regenerate the task list.
 
+<<<<<<< Updated upstream
 10. **Check for extension hooks**: After completion validation, check if `.specify/extensions.yml` exists in the project root.
     - If it exists, read it and look for entries under the `hooks.after_implement` key
     - If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
@@ -199,3 +200,78 @@ Note: This command assumes a complete task breakdown exists in tasks.md. If task
         EXECUTE_COMMAND: {command}
         ```
     - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
+=======
+---
+
+## Parallel Execution via Agent Teams
+
+Reference: See `{Skill: sdd:teams-orchestrate}` for full orchestration pattern.
+
+### Step 1: Check Team Mode Environment
+
+```bash
+jq -r '.env.CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS // ""' .claude/settings.local.json 2>/dev/null || echo ""
+```
+
+- **If NOT set to "1"**: STOP and tell the user:
+  "并行任务需要启用 Agent Teams。请在 Claude Code 设置中启用 `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`，然后重启。"
+- **If set to "1"**: Continue to Step 2
+
+### Step 2: Analyze Task Dependency Graph
+
+Read tasks.md and identify:
+1. All incomplete tasks with IDs and file paths
+2. Dependency relationships from phase ordering
+3. Group tasks by independence (no shared dependencies, different files)
+
+### Step 3: Parallelism Assessment
+
+- **If 0-1 independent task groups**: Execute tasks sequentially (no parallelism benefit)
+- **If 2+ independent task groups**: Use Agent Teams for parallel execution
+
+### Step 4: Spawn Teammates via Claude Code Agent Teams (NOT subagent)
+
+**CRITICAL**: Use Claude Code's native **Agent Teams** feature, not regular subagent.
+
+Claude Code Agent Teams requires:
+- `team_name`: "impl-\<feature-name\>" - creates/joins a team
+- `name`: "member-\<group-id\>" - unique teammate identifier
+- `isolation: "worktree"` - each teammate gets isolated git worktree
+
+Example Agent tool invocation for team mode:
+```
+Agent(
+    team_name="impl-feature-name",
+    name="member-us1",
+    isolation="worktree",
+    prompt="..."
+)
+```
+
+**NOT this (subagent, not team mode)**:
+```
+Agent(prompt="...")  # ← No team_name = subagent, NOT team mode
+```
+
+Each teammate receives:
+- Assigned task IDs and file paths
+- Contents of spec.md, plan.md, tasks.md
+- Instructions to message lead when complete
+
+**Lead's role**: Coordinate and review only. Never implement directly.
+
+### Step 5: Monitor & Spec Guardian Review Loop
+
+Teammates communicate via `SendMessage` tool. When teammate reports completion:
+
+1. Review their commits and modified files
+2. Run `{Skill: sdd:review-code}` for spec compliance
+3. If PASS: Merge worktree changes, update tasks.md checkboxes to `[X]`
+4. If FAIL: Send feedback via `SendMessage`, teammate fixes and resubmits
+5. If 3+ failures on same task: Report to user and pause
+
+### Step 6: Sequential Fallback
+
+If only 1 task group exists, execute tasks sequentially following tasks.md order.
+
+>>>>>>> Stashed changes
