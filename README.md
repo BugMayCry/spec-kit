@@ -437,6 +437,7 @@ Additional commands for enhanced quality and validation:
 
 | Command              | Description                                                                                                                          |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `/speckit.brainstorm` | Multi-agent collaborative brainstorming with Team mode, including repository awareness phase for architects and technical experts |
 | `/speckit.clarify`   | Clarify underspecified areas (recommended before `/speckit.plan`; formerly `/quizme`)                                                |
 | `/speckit.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.tasks`, before `/speckit.implement`)                             |
 | `/speckit.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
@@ -446,6 +447,51 @@ Additional commands for enhanced quality and validation:
 | Variable          | Description                                                                                                                                                                                                                                                                                            |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-photo-albums`) to work on a specific feature when not using Git branches.<br/>\*\*Must be set in the context of the agent you're working with prior to using `/speckit.plan` or follow-up commands. |
+
+### `/speckit.brainstorm` Command
+
+The `/speckit.brainstorm` command enables multi-agent collaborative brainstorming using Team mode with specialized roles (Product Manager, Architect, Technical Expert, Test Expert, Security Expert) and a devil's advocate challenge phase.
+
+**Key Features:**
+
+- **Repository Awareness Phase**: Before proposal preparation, architects and technical experts review project repository information (tech stack, architecture, core modules) to ensure proposals are grounded in reality
+- **Team Mode Collaboration**: Spawns multiple specialist agents to provide diverse perspectives
+- **Devil's Advocate Challenge**: Automated challenge of assumptions and risks
+- **Proposal vs Spec Distinction**: Brainstorm outputs are marked as "Proposals" to clearly distinguish from formal specifications
+
+#### Brainstorm Parameters
+
+| Parameter | Type | Description |
+| --------- | ---- |-------------|
+| `--mode {full\|quick}` | Option | Awareness display mode: `full` (complete repository info) or `quick` (core essentials only). Default: `full` |
+| `--skip-awareness` | Flag | Skip the repository awareness phase (requires prior confirmation record in `.specify/awareness-state.json`) |
+| `--with-security` | Flag | Include Security Expert in the brainstorming team |
+| `<idea>` | Argument | One-sentence feature description |
+
+#### Examples
+
+```bash
+# Basic brainstorming with full awareness phase
+/speckit.brainstorm Add user authentication with OAuth2 support
+
+# Quick awareness mode (core info only)
+/speckit.brainstorm Add payment processing --mode quick
+
+# Skip awareness phase (if previously confirmed)
+/speckit.brainstorm Add dark mode --skip-awareness
+
+# Include security expert
+/speckit.brainstorm Add file upload feature --with-security
+
+# Full mode with security expert
+/speckit.brainstorm Add API rate limiting --mode full --with-security
+```
+
+#### Output
+
+Brainstorm generates:
+- **`proposal-{number}-{short-name}-spec.md`**: Draft spec marked as "Proposal" status
+- **`brainstorm-appendix.md`**: Full technical analysis with debate transcript
 
 ## 🧩 Making Spec Kit Your Own: Extensions & Presets
 

@@ -125,10 +125,10 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T025 [P] Update README.md with new brainstorm parameters
-- [ ] T026 [P] Add examples for --mode and --skip-awareness in help text
-- [ ] T027 Validate all templates render correctly
-- [ ] T028 Run quickstart.md validation steps
+- [x] T025 [P] Update README.md with new brainstorm parameters
+- [x] T026 [P] Add examples for --mode and --skip-awareness in help text
+- [x] T027 Validate all templates render correctly
+- [x] T028 Run quickstart.md validation steps
 
 ---
 
