@@ -19,6 +19,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Parse user input**:
    - Extract the `<idea>` argument (one-sentence feature description)
+   - Generate short-name from idea (2-4 words, lowercase, hyphenated)
    - Check for `--with-security` flag
    - If no idea provided: Prompt user for clarification (EC-002)
 
@@ -64,8 +65,11 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Record decisions in Decisions Log
 
    ### Phase 4: Output
-   - Generate `spec.md` from proposals and decisions
-   - Generate `brainstorm-appendix.md` with full transcript
+   - Check for specs directory, create if not exists
+   - Determine next available spec number (e.g., `004`)
+   - Create directory: `specs/<number>-<short-name>/`
+   - Generate `specs/<number>-<short-name>/spec.md` from proposals and decisions
+   - Generate `specs/<number>-<short-name>/brainstorm-appendix.md` with full transcript
    - Present results to user
 
 6. **Fallback to Lite Mode** (if Team mode unavailable):
