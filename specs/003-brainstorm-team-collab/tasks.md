@@ -31,14 +31,14 @@
 
 ### Foundational - Implementation
 
-- [ ] T004 [P] Implement `/speckit.brainstorm` command skeleton in templates/commands/brainstorm.md
+- [X] T004 [P] Implement `/speckit.brainstorm` command skeleton in templates/commands/brainstorm.md
   - Add command parsing for `<idea>` argument
   - Add `--with-security` flag handler
   - Add CLI help text and usage guide
-- [ ] T005 [P] Implement team mode availability detection
+- [X] T005 [P] Implement team mode availability detection
   - Check `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` environment variable
   - Implement fallback to lite mode when Team mode unavailable (EC-001)
-- [ ] T006 [P] Define role configurations in templates/commands/brainstorm.md
+- [X] T006 [P] Define role configurations in templates/commands/brainstorm.md
   - Product Manager: member-pm
   - Architect: member-architect
   - Technical Expert: member-tech
@@ -56,40 +56,40 @@
 
 ### User Story 1 - Tests FIRST (TDD)
 
-- [ ] T007 [US1] Add unit tests for role proposal structure validation in tests/test_brainstorm_us1.py
+- [X] T007 [US1] Add unit tests for role proposal structure validation in tests/test_brainstorm_us1.py
   - Test Proposal model fields: role, content, key_points, risks, questions
   - Test Proposal serialization/deserialization
   - Test invalid role rejection
-- [ ] T008 [US1] Add unit tests for team member spawning logic in tests/test_brainstorm_us1.py
+- [X] T008 [US1] Add unit tests for team member spawning logic in tests/test_brainstorm_us1.py
   - Test spawn conditions for each role (always vs flag-based)
   - Test member ID generation (member-pm, member-architect, etc.)
   - Test security expert spawn only with --with-security flag
-- [ ] T009 [US1] Add unit tests for proposal message handling in tests/test_brainstorm_us1.py
+- [X] T009 [US1] Add unit tests for proposal message handling in tests/test_brainstorm_us1.py
   - Test propose message structure
   - Test proposal message parsing
   - Test timeout handling
-- [ ] T010 [US1] Add integration tests for Team Member spawning in tests/test_brainstorm_integration.py
+- [X] T010 [US1] Add integration tests for Team Member spawning in tests/test_brainstorm_integration.py
   - Test all 4 core roles spawn successfully
   - Test all 5 roles spawn with --with-security flag
   - Test member count matches expected
-- [ ] T011 [US1] Add integration tests for proposal collection in tests/test_brainstorm_integration.py
+- [X] T011 [US1] Add integration tests for proposal collection in tests/test_brainstorm_integration.py
   - Test all proposals collected within timeout
   - Test proposals aggregated by role
   - Test partial collection handles gracefully
 
 ### User Story 1 - Implementation AFTER Tests
 
-- [ ] T012 [US1] Implement Team Member spawning via Agent tool
+- [X] T012 [US1] Implement Team Member spawning via Agent tool
   - Use Agent tool with `team_name` and `name` parameters
   - Spawn member-{role-id} naming convention
   - Track spawned members in runtime state
-- [ ] T013 [US1] Implement proposal request message (`propose` type)
+- [X] T013 [US1] Implement proposal request message (`propose` type)
   - Define message structure with role, context, instructions
   - Send to each role member via SendMessage
-- [ ] T014 [US1] Implement proposal response handling (`proposal` type)
+- [X] T014 [US1] Implement proposal response handling (`proposal` type)
   - Parse structured proposal from each role
   - Store proposals in memory for later merge
-- [ ] T015 [US1] Implement proposal collection phase
+- [X] T015 [US1] Implement proposal collection phase
   - Wait for all role proposals to arrive
   - Aggregate proposals by role
   - Handle timeout gracefully
@@ -129,17 +129,17 @@
 
 ### User Story 2 - Implementation AFTER Tests
 
-- [ ] T021 [US2] Spawn Devil's Advocate member (member-devil) for debate phase
+- [X] T021 [US2] Spawn Devil's Advocate member (member-devil) for debate phase
   - Spawn only when debate phase starts
   - Provide proposal context to devil's advocate
-- [ ] T022 [US2] Implement debate initiation message (`debate` type)
+- [X] T022 [US2] Implement debate initiation message (`debate` type)
   - Notify all members debate phase has started
   - Share all proposals with devil's advocate
-- [ ] T023 [US2] Implement counter-argument handling (`counter_argument` type)
+- [X] T023 [US2] Implement counter-argument handling (`counter_argument` type)
   - Parse challenges from devil's advocate
   - Route challenges to relevant role
   - Track contested vs unanimous points
-- [ ] T024 [US2] Implement devil's advocate challenge generation
+- [X] T024 [US2] Implement devil's advocate challenge generation
   - Challenge every assumption stated as fact
   - Ask "what could go wrong?" for each point
   - Probe edge cases and boundary conditions
@@ -156,42 +156,42 @@
 
 ### User Story 3 - Tests FIRST (TDD)
 
-- [ ] T025 [US3] Add unit tests for options generation in tests/test_brainstorm_us3.py
+- [X] T025 [US3] Add unit tests for options generation in tests/test_brainstorm_us3.py
   - Test multiple options generation when consensus fails
   - Test pros/cons documentation for each option
   - Test risk assessment inclusion
-- [ ] T026 [US3] Add unit tests for decision request/response in tests/test_brainstorm_us3.py
+- [X] T026 [US3] Add unit tests for decision request/response in tests/test_brainstorm_us3.py
   - Test decision_request message structure
   - Test decision message parsing
   - Test decision recording with rationale
-- [ ] T027 [US3] Add unit tests for decision recording in tests/test_brainstorm_us3.py
+- [X] T027 [US3] Add unit tests for decision recording in tests/test_brainstorm_us3.py
   - Test Decisions Log format
   - Test decision persistence
   - Test decision validation
-- [ ] T028 [US3] Add integration tests for decision flow in tests/test_brainstorm_integration.py
+- [X] T028 [US3] Add integration tests for decision flow in tests/test_brainstorm_integration.py
   - Test contested point triggers options generation
   - Test user decision updates spec
   - Test unanimous case (EC-003) skips decision flow
-- [ ] T029 [US3] Add E2E test for decision scenario in tests/test_brainstorm_e2e.py
+- [X] T029 [US3] Add E2E test for decision scenario in tests/test_brainstorm_e2e.py
   - Test: Two roles disagree on architecture → options with pros/cons presented
   - Verify: User selects option → decision recorded in spec
   - Verify: Appendix reflects decision rationale
 
 ### User Story 3 - Implementation AFTER Tests
 
-- [ ] T030 [US3] Implement options generation when consensus fails
+- [X] T030 [US3] Implement options generation when consensus fails
   - When roles disagree, collect multiple options
   - Document pros and cons for each option
   - Include risk assessment
-- [ ] T031 [US3] Implement decision request to user (`decision_request` type)
+- [X] T031 [US3] Implement decision request to user (`decision_request` type)
   - Present contested topic clearly
   - Show all options with trade-offs
   - Request user selection
-- [ ] T032 [US3] Implement user decision recording (`decision` type)
+- [X] T032 [US3] Implement user decision recording (`decision` type)
   - Accept user decision via message
   - Record decision with rationale
   - Update spec with Decisions Log
-- [ ] T033 [US3] Handle unanimous agreement case (EC-003)
+- [X] T033 [US3] Handle unanimous agreement case (EC-003)
   - Skip decision flow if all points are agreed
   - Proceed directly to spec generation
 
@@ -207,37 +207,37 @@
 
 ### User Story 4 - Tests FIRST (TDD)
 
-- [ ] T034 [US4] Add unit tests for spec.md generation in tests/test_brainstorm_us4.py
+- [X] T034 [US4] Add unit tests for spec.md generation in tests/test_brainstorm_us4.py
   - Test spec sections populated from role proposals
   - Test user decisions applied to contested points
   - Test spec completeness per SC-006 checklist
-- [ ] T035 [US4] Add unit tests for transcript collection in tests/test_brainstorm_us4.py
+- [X] T035 [US4] Add unit tests for transcript collection in tests/test_brainstorm_us4.py
   - Test chronological message storage
   - Test message type inclusion
   - Test no messages omitted verification
-- [ ] T036 [US4] Add unit tests for appendix generation in tests/test_brainstorm_us4.py
+- [X] T036 [US4] Add unit tests for appendix generation in tests/test_brainstorm_us4.py
   - Test appendix file naming (brainstorm-appendix.md)
   - Test chronological format
   - Test completeness verification
-- [ ] T037 [US4] Add integration tests for output generation in tests/test_brainstorm_integration.py
+- [X] T037 [US4] Add integration tests for output generation in tests/test_brainstorm_integration.py
   - Test spec.md generated with all sections
   - Test appendix.md generated with full transcript
   - Test file format correctness
-- [ ] T038 [US4] Add E2E test for complete flow in tests/test_brainstorm_e2e.py
+- [X] T038 [US4] Add E2E test for complete flow in tests/test_brainstorm_e2e.py
   - Test: Full brainstorm session → spec.md + appendix.md
   - Verify: Appendix contains all proposals, challenges, decisions
   - Verify: SC-005 no messages omitted
 
 ### User Story 4 - Implementation AFTER Tests
 
-- [ ] T039 [US4] Implement spec.md generation from proposals and decisions
+- [X] T039 [US4] Implement spec.md generation from proposals and decisions
   - Merge all role proposals into spec sections
   - Apply user decisions to contested points
   - Generate complete spec.md output
-- [ ] T040 [US4] Implement debate transcript collection
+- [X] T040 [US4] Implement debate transcript collection
   - Store all messages chronologically in memory
   - Include proposals, challenges, responses, decisions
-- [ ] T041 [US4] Implement appendix generation
+- [X] T041 [US4] Implement appendix generation
   - Generate brainstorm-appendix.md from transcript
   - Format as chronological record
   - Ensure no messages omitted (SC-005)
@@ -252,41 +252,41 @@
 
 ### Edge Cases - Tests FIRST
 
-- [ ] T042 [P] Add unit tests for EC-001 (lite mode fallback) in tests/test_brainstorm_edge.py
+- [X] T042 [P] Add unit tests for EC-001 (lite mode fallback) in tests/test_brainstorm_edge.py
   - Test team mode unavailable detection
   - Test warning message display
   - Test lite mode sequential prompts
-- [ ] T043 [P] Add unit tests for EC-002 (vague idea) in tests/test_brainstorm_edge.py
+- [X] T043 [P] Add unit tests for EC-002 (vague idea) in tests/test_brainstorm_edge.py
   - Test empty idea detection
   - Test vague idea detection
   - Test clarification prompt
-- [ ] T044 [P] Add unit tests for EC-004 (mid-session security expert) in tests/test_brainstorm_edge.py
+- [X] T044 [P] Add unit tests for EC-004 (mid-session security expert) in tests/test_brainstorm_edge.py
   - Test security concern detection
   - Test mid-session expert invitation
   - Test graceful role addition
-- [ ] T045 [P] Add unit tests for EC-005 (debate intervention) in tests/test_brainstorm_edge.py
+- [X] T045 [P] Add unit tests for EC-005 (debate intervention) in tests/test_brainstorm_edge.py
   - Test unproductive debate detection
   - Test user intervention trigger
   - Test immediate decision acceptance
 
 ### Edge Cases - Implementation AFTER Tests
 
-- [ ] T046 Implement EC-002: Empty/vague idea handling
+- [X] T046 Implement EC-002: Empty/vague idea handling
   - Detect vague or empty idea input
   - Prompt user for clarification before proceeding
-- [ ] T047 Implement EC-004: Mid-session security expert invitation
+- [X] T047 Implement EC-004: Mid-session security expert invitation
   - Allow inviting security expert during debate
   - Handle mid-session role addition gracefully
-- [ ] T048 Implement EC-005: Debate intervention
+- [X] T048 Implement EC-005: Debate intervention
   - Allow user to intervene when debate is unproductive
   - Accept immediate decisions from user
 
 ### Final Polish
 
-- [ ] T049 [P] Run full test suite and verify all tests pass
-- [ ] T050 [P] Verify SC-006 completeness score ≥ 80%
-- [ ] T051 [P] Update REVIEWERS.md with review checklist
-- [ ] T052 [P] Final documentation review
+- [X] T049 [P] Run full test suite and verify all tests pass
+- [X] T050 [P] Verify SC-006 completeness score ≥ 80%
+- [X] T051 [P] Update REVIEWERS.md with review checklist
+- [X] T052 [P] Final documentation review
 
 ---
 
