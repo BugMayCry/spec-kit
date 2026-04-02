@@ -53,6 +53,22 @@
 
 ---
 
+### User Story 4 - 提案与正式规范区分 (Priority: P2)
+
+Brainstorm命令生成的spec.md文件应明确标记为"提案"状态，与后续specify命令生成的正式spec.md区分，避免混淆。
+
+**Why this priority**: 提案是初始讨论版本，需要明确标识以便团队理解其成熟度和后续处理方式。
+
+**Independent Test**: 执行brainstorm后生成的文档具有明确的"提案"标识，可通过文件名或内容标签识别。
+
+**Acceptance Scenarios**:
+
+1. **Given** 用户执行brainstorm命令并完成提案生成，**When** 系统创建spec.md文件，**Then** 文件中包含"提案"或"Proposal"状态标识
+2. **Given** 团队成员打开brainstorm生成的spec.md，**When** 查看文档状态，**Then** 可以明确识别这是提案而非正式规范
+3. **Given** 提案被批准并需要转为正式规范，**When** 用户执行specify命令，**Then** specify生成的文档具有正式规范状态标识
+
+---
+
 ### Edge Cases
 
 - 当仓库信息不完整或缺失时，系统应该如何处理？
@@ -68,6 +84,7 @@
 - **FR-003**: 用户必须明确确认已了解项目情况后，才能进入提案准备阶段
 - **FR-004**: 系统应记录用户完成仓库认知的时间戳，作为提案元数据的一部分
 - **FR-005**: 对于已执行过仓库认知的用户，系统应记住状态但仍提供重新查看的选项
+- **FR-006**: Brainstorm命令生成的spec.md必须包含"提案"或"Proposal"状态标识，与specify命令生成的正式规范明确区分
 
 ### Key Entities *(include if feature involves data)*
 
@@ -82,6 +99,7 @@
 - **SC-002**: 用户完成仓库认知的平均时间不超过5分钟
 - **SC-003**: 架构师和技术专家对提案与项目实际情况匹配度的满意度达到90%以上
 - **SC-004**: 因提案与项目实际情况不匹配导致的返工率降低50%
+- **SC-005**: 100%的brainstorm生成文档包含明确的状态标识，可准确识别为提案
 
 ## Assumptions
 
