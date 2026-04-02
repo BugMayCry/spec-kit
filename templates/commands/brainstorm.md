@@ -153,19 +153,64 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Record decisions in Decisions Log
 
    ### Phase 4: Output
+   **CRITICAL: All three files MUST be generated before this phase is complete. Do not skip or simplify this phase.**
+
+   #### Step 4.1: Prepare Output Directory
    - Check for specs directory, create if not exists
    - Determine next available spec number (e.g., `004`)
    - Create directory: `specs/<number>-<short-name>/`
-   - Generate `specs/<number>-<short-name>/spec.proposal.md` (user stories draft)
-     - **Source**: PM + Test Expert contributions
-     - **Contains**: User scenarios, user stories, acceptance criteria, priority
-     - **No technical details**
-   - Generate `specs/<number>-<short-name>/plan.proposal.md` (technical proposal draft)
-     - **Source**: Architect + Tech Expert contributions
-     - **Contains**: System design, tech stack, risks, integration points
-   - Generate `specs/<number>-<short-name>/brainstorm-appendix.md` (full transcript, unchanged)
+
+   #### Step 4.2: Generate Required Files
+   Generate ALL three files in the order specified:
+
+   1. **Generate `specs/<number>-<short-name>/spec.proposal.md`** (user stories draft)
+      - **Source**: PM + Test Expert contributions only
+      - **Contains**: User scenarios, user stories, acceptance criteria, priority
+      - **FORBIDDEN**: No technical details, no framework names, no API design, no data structures
+
+   2. **Generate `specs/<number>-<short-name>/plan.proposal.md`** (technical proposal draft)
+      - **Source**: Architect + Tech Expert contributions only
+      - **Contains**: System design, tech stack, risks, integration points
+      - **FORBIDDEN**: No business requirements, no user stories, no acceptance criteria
+
+   3. **Generate `specs/<number>-<short-name>/brainstorm-appendix.md`** (full transcript)
+      - **Source**: All role proposals verbatim + debate transcript
+      - **Contains**: Complete chronological record of all discussions
+
+   #### Step 4.3: Validate Output (MANDATORY)
+   **Do NOT proceed until ALL validations pass. Report failure if any file is missing or invalid.**
+
+   Perform the following checks in order:
+
+   1. **File Existence Check**: Verify all three files exist
+      ```bash
+      ls -la specs/<number>-<short-name>/spec.proposal.md
+      ls -la specs/<number>-<short-name>/plan.proposal.md
+      ls -la specs/<number>-<short-name>/brainstorm-appendix.md
+      ```
+
+   2. **Content Non-Empty Check**: Verify each file has content (> 100 bytes)
+      ```bash
+      wc -c specs/<number>-<short-name>/*.md
+      ```
+
+   3. **Content Separation Check**:
+      - `spec.proposal.md` must NOT contain: framework names, API endpoints, database schemas, technical jargon
+      - `plan.proposal.md` must NOT contain: user stories in "As a user" format, acceptance criteria numbers
+
+   4. **If ANY validation fails**:
+      - Report which file(s) failed validation
+      - Report WHY it failed
+      - Do NOT complete the command
+      - Ask user if they want to retry or abort
+
+   #### Step 4.4: Create Feature Branch
    - **Create feature branch**: `git checkout -b <number>-<short-name>` to enable seamless specify workflow
-   - Present results to user with next steps:
+   - If branch creation fails, warn user but do NOT block completion
+
+   #### Step 4.5: Present Results
+   - Confirm all three files were created with correct paths
+   - Display next steps:
      - "Run `/speckit.specify` to refine spec.proposal.md into final spec"
      - "Run `/speckit.plan` to analyze plan.proposal.md and create technical design"
 
@@ -335,6 +380,7 @@ Comprehensive technical analysis preserved for reference:
 | EC-003 | Unanimous agreement | Skip debate, proceed to spec |
 | EC-004 | Security concerns mid-debate | Offer to invite security expert |
 | EC-005 | Debate unproductive | Allow user intervention |
+| EC-006 | Output file validation failed | Report failure, do not complete command, ask to retry or abort |
 
 ---
 
@@ -345,6 +391,8 @@ Comprehensive technical analysis preserved for reference:
 | SC-001 | Proposal generation time | < 5 min |
 | SC-002 | Devil's advocate challenge rate | ≥ 3 challenges/major assumption |
 | SC-003 | Debate resolution | ≤ 2 rounds |
-| SC-004 | spec.md completeness | All sections populated |
-| SC-005 | Appendix completeness | No messages omitted |
-| SC-006 | Completeness score | ≥ 80% |
+| SC-004 | spec.proposal.md generated | File exists with ≥ 100 bytes |
+| SC-005 | plan.proposal.md generated | File exists with ≥ 100 bytes |
+| SC-006 | brainstorm-appendix.md generated | File exists with ≥ 100 bytes |
+| SC-007 | Content separation validated | spec.proposal has no tech details, plan.proposal has no user stories |
+| SC-008 | Branch created | `git checkout -b <number>-<short-name>` executed |
